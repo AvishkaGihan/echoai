@@ -7,7 +7,7 @@ class ApiConfig {
   // ========================================
 
   /// Gemini model to use
-  static const String geminiModel = 'gemini-2.0-flash-exp';
+  static const String geminiModel = 'gemini-2.5-flash';
 
   /// Maximum tokens for response
   static const int maxTokens = 1000;
@@ -117,6 +117,12 @@ class ApiConfig {
 
   /// Minimum confidence threshold for speech recognition
   static const double speechMinConfidence = 0.7;
+
+  /// Maximum recording duration in milliseconds
+  static const int maxRecordingMs = 30000; // 30 seconds
+
+  /// Silence threshold in milliseconds before auto-stopping recording
+  static const int silenceThresholdMs = 2000; // 2 seconds
 
   // ========================================
   // CACHING
