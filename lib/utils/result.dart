@@ -156,7 +156,7 @@ final class Error<T> extends Result<T> {
   int get hashCode => message.hashCode;
 }
 
-/// Extension methods for Future<Result<T>>
+/// Extension methods for `Future<Result<T>>`
 extension FutureResultExtensions<T> on Future<Result<T>> {
   /// Map over future result
   Future<Result<R>> map<R>(R Function(T data) transform) async {
