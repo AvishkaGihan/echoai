@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../models/user.dart';
 import '../utils/result.dart';
+import '../utils/logger.dart';
 import '../config/api_config.dart';
 
 /// Authentication service using Firebase Auth
@@ -285,12 +286,12 @@ class AuthService {
             },
             onError: (error) {
               // Handle authentication errors
-              // TODO: Add proper logging instead of print
+              Logger.error('Google Sign-In authentication error', error);
             },
           );
         })
         .catchError((error) {
-          // TODO: Add proper logging instead of print
+          Logger.error('Failed to initialize Google Sign-In', error);
         });
   }
 
