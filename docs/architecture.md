@@ -1,7 +1,7 @@
 # EchoAI Architecture Document
 
 **Author:** Winston (Architect Agent)
-**Date:** November 10, 2025
+**Date:** November 12, 2025
 **Version:** 1.0
 **Status:** ✅ Decision Locked - Ready for Implementation
 
@@ -23,17 +23,18 @@ Start with Flutter's official project generator:
 flutter create echoai
 cd echoai
 flutter pub add \
-  firebase_core:^2.30.0 \
-  firebase_auth:^4.20.0 \
+  firebase_core:^4.2.1 \
+  firebase_auth:^6.1.2 \
   firebase_ai:^3.5.0 \
-  provider:^6.0.0 \
+  provider:^6.1.5+1 \
   sqflite:^2.4.2 \
   speech_to_text:^7.3.0 \
   flutter_tts:^4.2.3 \
   google_sign_in:^7.2.0 \
-  intl:^0.19.0 \
+  intl:^0.20.2 \
   uuid:^4.5.2 \
-  path_provider:^2.1.5
+  path_provider:^2.1.5 \
+  path:^1.9.0
 ```
 
 This is the **first implementation story**—establishes base architecture with Firebase CLI configuration.
@@ -44,13 +45,13 @@ This is the **first implementation story**—establishes base architecture with 
 
 | Component            | Technology                | Version | Why                                                       |
 | -------------------- | ------------------------- | ------- | --------------------------------------------------------- |
-| **Framework**        | Flutter                   | 3.24+   | Native iOS/Android, single codebase, Material Design 3    |
+| **Framework**        | Flutter                   | 3.9+    | Native iOS/Android, single codebase, Material Design 3    |
 | **AI API**           | Firebase AI Logic         | 3.5.0+  | Official Gemini SDK, streaming support, token management  |
-| **Authentication**   | Firebase Auth             | 4.20.0+ | Email/password + Google Sign-In, free tier, secure        |
+| **Authentication**   | Firebase Auth             | 6.1.2+  | Email/password + Google Sign-In, free tier, secure        |
 | **Database**         | SQLite                    | 2.4.2+  | Local on-device storage, fast queries, zero cloud costs   |
 | **Voice Input**      | speech_to_text            | 7.3.0+  | Cross-platform, accurate transcription, silence detection |
 | **Voice Output**     | flutter_tts               | 4.2.3+  | Natural voices, adjustable speed, both platforms          |
-| **State Management** | Provider                  | 6.0.0+  | Lightweight, proven, easy to test, clear data flow        |
+| **State Management** | Provider                  | 6.1.5+  | Lightweight, proven, easy to test, clear data flow        |
 | **OAuth**            | google_sign_in            | 7.2.0+  | Google authentication, integrated with Firebase           |
 | **Utilities**        | intl, uuid, path_provider | Latest  | Localization, unique IDs, app directories                 |
 
@@ -62,13 +63,18 @@ This is the **first implementation story**—establishes base architecture with 
 
 ```
 echoai/
-├── .bmad/                      # Agent configuration (ignored in dev)
 ├── .github/
 ├── docs/                       # Design & architecture documentation
 │   ├── PRD.md
 │   ├── architecture.md         # (this file)
 │   ├── ux-design-specification.md
-│   └── product-brief-*.md
+│   ├── DEPLOYMENT.md
+│   ├── PROJECT_STRUCTURE.md
+│   ├── SETUP.md
+│   ├── CHANGELOG.md
+│   ├── CONTRIBUTING.md
+│   ├── LICENSE
+│   └── SECURITY.md
 │
 ├── lib/
 │   ├── main.dart              # App entry point, Firebase init, theme setup
@@ -135,21 +141,24 @@ echoai/
 │       ├── message_bubble_test.dart
 │       └── message_input_test.dart
 │
-├── assets/                    # Static resources
-│   ├── images/               # App logos, UI assets
-│   ├── fonts/                # Custom typography (if needed)
-│   └── icons/                # Icon assets
-│
 ├── android/                  # Android-specific configuration
-│   └── app/src/main/AndroidManifest.xml  # Permissions: INTERNET, RECORD_AUDIO
+│   ├── app/
+│   │   ├── build.gradle.kts
+│   │   ├── google-services.json
+│   │   └── src/main/AndroidManifest.xml  # Permissions: INTERNET, RECORD_AUDIO
+│   └── gradle.properties
 │
 ├── ios/                      # iOS-specific configuration
 │   └── Runner/Info.plist     # Permissions: NSMicrophoneUsageDescription
 │
+├── linux/                    # Linux-specific configuration
+├── macos/                    # macOS-specific configuration
+├── web/                      # Web-specific configuration
+├── windows/                  # Windows-specific configuration
+│
 ├── pubspec.yaml             # Dependencies and build config
 ├── analysis_options.yaml    # Dart lint rules
 ├── firebase.json            # Firebase configuration
-├── .env.example             # Environment variables template
 └── README.md                # Setup and development guide
 
 ```
