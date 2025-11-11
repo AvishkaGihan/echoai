@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 import 'config/firebase_options.dart';
+import 'providers/auth_provider.dart';
+import 'providers/chat_provider.dart';
+import 'providers/history_provider.dart';
+import 'providers/settings_provider.dart';
+import 'providers/voice_provider.dart';
+import 'screens/auth/login_screen.dart';
+import 'screens/auth/signup_screen.dart';
+import 'screens/auth/password_reset_screen.dart';
+import 'screens/chat_screen.dart';
+import 'screens/history_screen.dart';
+import 'screens/settings_screen.dart';
 import 'utils/constants.dart';
 import 'utils/theme.dart';
 
@@ -38,19 +50,16 @@ class EchoAIApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Wrap with MultiProvider when providers are implemented
-    // return MultiProvider(
-    //   providers: [
-    //     ChangeNotifierProvider(create: (_) => AuthProvider()),
-    //     ChangeNotifierProvider(create: (_) => ChatProvider()),
-    //     ChangeNotifierProvider(create: (_) => HistoryProvider()),
-    //     ChangeNotifierProvider(create: (_) => SettingsProvider()),
-    //     ChangeNotifierProvider(create: (_) => VoiceProvider()),
-    //   ],
-    //   child: const _AppContent(),
-    // );
-
-    return const _AppContent();
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider()),
+        ChangeNotifierProvider(create: (_) => HistoryProvider()),
+        ChangeNotifierProvider(create: (_) => SettingsProvider()),
+        ChangeNotifierProvider(create: (_) => VoiceProvider()),
+      ],
+      child: const _AppContent(),
+    );
   }
 }
 
@@ -59,37 +68,46 @@ class _AppContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Get accent color from SettingsProvider
-    // final settings = context.watch<SettingsProvider>().settings;
-    // final accentColor = AppConstants.getAccentColor(settings.accentColor);
+    return Consumer<SettingsProvider>(
+      builder: (context, settingsProvider, child) {
+        return MaterialApp(
+          title: AppConstants.appName,
+          debugShowCheckedModeBanner: false,
 
-    return MaterialApp(
-      title: AppConstants.appName,
-      debugShowCheckedModeBanner: false,
+          // Theme configuration (dynamic based on accent color)
+          theme: AppTheme.getThemeByColorName(
+            settingsProvider.settings.accentColor,
+          ),
+          darkTheme: AppTheme.getThemeByColorName(
+            settingsProvider.settings.accentColor,
+          ),
+          themeMode: ThemeMode.dark, // Always dark for MVP
+          // Routes
+          initialRoute: AppConstants.routeSplash,
+          routes: _buildRoutes(),
 
-      // Theme configuration
-      theme: AppTheme.getDarkTheme(),
-      darkTheme: AppTheme.getDarkTheme(),
-      themeMode: ThemeMode.dark, // Always dark for MVP
-      // Routes (to be implemented)
-      initialRoute: AppConstants.routeSplash,
-      routes: {
-        AppConstants.routeSplash: (context) => const SplashScreen(),
-        // AppConstants.routeLogin: (context) => const LoginScreen(),
-        // AppConstants.routeSignup: (context) => const SignupScreen(),
-        // AppConstants.routePasswordReset: (context) => const PasswordResetScreen(),
-        // AppConstants.routeChat: (context) => const ChatScreen(),
-        // AppConstants.routeHistory: (context) => const HistoryScreen(),
-        // AppConstants.routeSettings: (context) => const SettingsScreen(),
-      },
-
-      // Handle unknown routes
-      onUnknownRoute: (settings) {
-        return MaterialPageRoute(
-          builder: (context) => const ErrorScreen(message: 'Page not found'),
+          // Handle unknown routes
+          onUnknownRoute: (settings) {
+            return MaterialPageRoute(
+              builder: (context) =>
+                  const ErrorScreen(message: 'Page not found'),
+            );
+          },
         );
       },
     );
+  }
+
+  Map<String, WidgetBuilder> _buildRoutes() {
+    return {
+      AppConstants.routeSplash: (context) => const SplashScreen(),
+      AppConstants.routeLogin: (context) => const LoginScreen(),
+      AppConstants.routeSignup: (context) => const SignupScreen(),
+      AppConstants.routePasswordReset: (context) => const PasswordResetScreen(),
+      AppConstants.routeChat: (context) => const ChatScreen(),
+      AppConstants.routeHistory: (context) => const HistoryScreen(),
+      AppConstants.routeSettings: (context) => const SettingsScreen(),
+    };
   }
 }
 
@@ -109,20 +127,25 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _initializeApp() async {
-    // TODO: Check authentication status
-    // TODO: Load user settings
-    // TODO: Initialize services
+    // Capture providers and context before async gaps
+    final settingsProvider = context.read<SettingsProvider>();
+    final authProvider = context.read<AuthProvider>();
+    final navigator = Navigator.of(context);
 
-    // Simulate initialization delay
+    // Load settings first
+    await settingsProvider.loadSettings();
+
+    // Wait minimum 2 seconds for splash effect
     await Future.delayed(const Duration(seconds: 2));
 
     if (mounted) {
-      // TODO: Navigate based on auth status
-      // If authenticated: go to Chat
-      // If not authenticated: go to Login
-
-      // For now, show setup complete screen
-      // Navigator.of(context).pushReplacementNamed(AppConstants.routeLogin);
+      if (authProvider.isAuthenticated) {
+        // User is logged in, go to chat
+        navigator.pushReplacementNamed(AppConstants.routeChat);
+      } else {
+        // User is not logged in, go to login
+        navigator.pushReplacementNamed(AppConstants.routeLogin);
+      }
     }
   }
 
@@ -134,7 +157,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // App logo (placeholder)
+            // App logo
             Container(
               width: 120,
               height: 120,
