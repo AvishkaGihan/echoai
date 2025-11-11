@@ -7,38 +7,24 @@ environment:
   sdk: ^3.9.2
 
 dependencies:
+  firebase_ai: ^3.5.0
+  firebase_auth: ^6.1.2
+  firebase_core: ^4.2.1
   flutter:
     sdk: flutter
-
-  # Firebase core
-  firebase_core: ^4.2.1
-
-  # Firebase services
-  firebase_auth: ^6.1.2
-  firebase_ai: ^3.5.0
-
-  # State management
-  provider: ^6.1.5+1
-
-  # Local storage
-  sqflite: ^2.4.2
-  path_provider: ^2.1.5
-
-  # Voice Features
-  speech_to_text: ^7.3.0
   flutter_tts: ^4.2.3
-
-  # Authentication
   google_sign_in: ^7.2.0
-
-  # Utilities
-  uuid: ^4.5.2
   intl: ^0.20.2
+  path_provider: ^2.1.5
+  provider: ^6.1.5+1
+  speech_to_text: ^7.3.0
+  sqflite: ^2.4.2
+  uuid: ^4.5.2
 
 dev_dependencies:
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
