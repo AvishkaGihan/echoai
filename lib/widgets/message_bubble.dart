@@ -146,7 +146,68 @@ class MessageBubble extends StatelessWidget {
             ),
           ),
 
-          // Reactions
+          // Quick action buttons
+          // Quick action buttons (only for AI messages)
+          if (!message.isUserMessage)
+            Padding(
+              padding: const EdgeInsets.only(top: AppConstants.spaceSm),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                spacing: AppConstants.spaceSm,
+                children: [
+                  // Reaction button
+                  InkWell(
+                    onTap: () => _showReactionPicker(context),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(AppConstants.radiusSmall),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(AppConstants.spaceXs),
+                      child: Icon(
+                        Icons.add_reaction_outlined,
+                        size: 18,
+                        color: AppConstants.textSecondary,
+                      ),
+                    ),
+                  ),
+
+                  // Text-to-speech button
+                  if (onSpeak != null)
+                    InkWell(
+                      onTap: onSpeak,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(AppConstants.radiusSmall),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(AppConstants.spaceXs),
+                        child: Icon(
+                          Icons.volume_up_outlined,
+                          size: 18,
+                          color: AppConstants.textSecondary,
+                        ),
+                      ),
+                    ),
+
+                  // More options button
+                  InkWell(
+                    onTap: () => _showMessageOptions(context),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(AppConstants.radiusSmall),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(AppConstants.spaceXs),
+                      child: Icon(
+                        Icons.more_horiz,
+                        size: 18,
+                        color: AppConstants.textSecondary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+          // Reactions display
           if (message.hasReactions)
             Padding(
               padding: const EdgeInsets.only(top: AppConstants.spaceXs),
@@ -189,6 +250,80 @@ class MessageBubble extends StatelessWidget {
         ),
       ),
       child: Text(emoji, style: const TextStyle(fontSize: 14)),
+    );
+  }
+
+  void _showReactionPicker(BuildContext context) {
+    final reactionEmojis = ['👍', '👎', '❤️', '🔥', '🎉', '😂', '😮', '😢'];
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppConstants.neutralSurface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AppConstants.radiusLarge),
+        ),
+      ),
+      builder: (context) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppConstants.spaceMd,
+            vertical: AppConstants.spaceMd,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Add a reaction',
+                style: TextStyle(
+                  fontSize: AppConstants.fontSizeH3,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: AppConstants.spaceMd),
+              Wrap(
+                spacing: AppConstants.spaceMd,
+                runSpacing: AppConstants.spaceMd,
+                children: reactionEmojis
+                    .map(
+                      (emoji) => InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                          onReaction?.call(emoji);
+                        },
+                        borderRadius: BorderRadius.circular(
+                          AppConstants.radiusSmall,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(AppConstants.spaceMd),
+                          decoration: BoxDecoration(
+                            color: message.reactions.contains(emoji)
+                                ? AppConstants.accentCyan.withValues(alpha: 0.2)
+                                : Colors.transparent,
+                            border: Border.all(
+                              color: message.reactions.contains(emoji)
+                                  ? AppConstants.accentCyan
+                                  : Colors.transparent,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              AppConstants.radiusSmall,
+                            ),
+                          ),
+                          child: Text(
+                            emoji,
+                            style: const TextStyle(fontSize: 32),
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

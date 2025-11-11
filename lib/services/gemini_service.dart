@@ -85,13 +85,6 @@ class GeminiService {
         final text = chunk.text;
         if (text != null && text.isNotEmpty) {
           yield text;
-
-          // Small delay for visible typing effect
-          if (ApiConfig.streamChunkDelayMs > 0) {
-            await Future.delayed(
-              const Duration(milliseconds: ApiConfig.streamChunkDelayMs),
-            );
-          }
         }
       }
     } on TimeoutException {
