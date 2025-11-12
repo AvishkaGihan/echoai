@@ -99,7 +99,7 @@ jobs:
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS_DART }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: |
-          echo "$FIREBASE_OPTIONS" > lib/firebase_options.dart
+          echo "$FIREBASE_OPTIONS" > lib/config/firebase_options.dart
           echo "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
 
       - name: Get dependencies
@@ -147,7 +147,7 @@ jobs:
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS_DART }}
           GOOGLE_SERVICE_INFO_PLIST: ${{ secrets.GOOGLE_SERVICE_INFO_PLIST }}
         run: |
-          echo "$FIREBASE_OPTIONS" > lib/firebase_options.dart
+          echo "$FIREBASE_OPTIONS" > lib/config/firebase_options.dart
           echo "$GOOGLE_SERVICE_INFO_PLIST" > ios/Runner/GoogleService-Info.plist
 
       - name: Get dependencies
