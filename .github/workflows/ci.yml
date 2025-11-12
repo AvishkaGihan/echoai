@@ -31,6 +31,7 @@ jobs:
         run: |
           mkdir -p lib/config
           echo "$FIREBASE_OPTIONS" > lib/config/firebase_options.dart
+          dart format lib/config/firebase_options.dart
 
       - name: Get dependencies
         run: flutter pub get
@@ -69,6 +70,7 @@ jobs:
         run: |
           mkdir -p lib/config
           echo "$FIREBASE_OPTIONS" > lib/config/firebase_options.dart
+          dart format lib/config/firebase_options.dart
 
       - name: Get dependencies
         run: flutter pub get
