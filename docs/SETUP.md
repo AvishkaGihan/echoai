@@ -28,7 +28,7 @@ This guide will walk you through setting up EchoAI for development from scratch.
 
 - GitHub account (for cloning repository)
 - Firebase account (free tier is sufficient)
-- Google Cloud account (for Vertex AI access)
+- Google Cloud account (for Firebase AI access)
 
 ---
 
@@ -159,11 +159,11 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"  # macOS/Linux
 
 ## Firebase Configuration
 
-### 1. Create Firebase Project
+### 2. Create Firebase Project
 
 1. Go to [Firebase Console](https://console.firebase.google.com)
 2. Click "Add project"
-3. Name: `echoai-dev` (or your choice)
+3. Name: `echoai-app-a0800` (or your choice)
 4. Disable Google Analytics (optional for development)
 5. Click "Create Project"
 
@@ -176,13 +176,13 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"  # macOS/Linux
    - Add support email
    - Save
 
-### 3. Enable Vertex AI (Gemini)
+### 3. Enable Firebase AI (Gemini)
 
-1. Go to **Build** > **Vertex AI in Firebase**
+1. Go to **Build** > **AI (Gemini)**
 2. Click "Get Started"
 3. Select pricing tier (Spark - Free is fine for development)
-4. Enable Vertex AI API in Google Cloud Console
-5. Wait for API to be enabled (~2 minutes)
+4. The Firebase AI API will be automatically enabled
+5. Wait for setup to complete (~2 minutes)
 
 ### 4. Configure Flutter App
 
@@ -201,7 +201,7 @@ flutterfire configure
 
 This will:
 
-- Create `lib/firebase_options.dart`
+- Create `lib/config/firebase_options.dart`
 - Download `google-services.json` (Android)
 - Download `GoogleService-Info.plist` (iOS)
 - Register your apps in Firebase
@@ -210,7 +210,7 @@ This will:
 
 ```bash
 # Check generated file exists
-ls lib/firebase_options.dart
+ls lib/config/firebase_options.dart
 
 # For Android
 ls android/app/google-services.json
@@ -231,7 +231,7 @@ Edit `android/app/src/main/AndroidManifest.xml`:
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.avishkagihan.echoai">
+    package="com.example.echoai">
 
     <!-- Add these permissions -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -261,7 +261,7 @@ android {
     compileSdkVersion 34  // Use latest
 
     defaultConfig {
-        applicationId "com.avishkagihan.echoai"
+        applicationId "com.example.echoai"
         minSdkVersion 21  // For Firebase AI
         targetSdkVersion 34
         versionCode 1
@@ -302,7 +302,7 @@ Edit `ios/Runner/Info.plist`:
 
     <!-- Bundle identifier -->
     <key>CFBundleIdentifier</key>
-    <string>com.avishkagihan.echoai</string>
+    <string>com.example.echoai</string>
 </dict>
 ```
 
@@ -426,7 +426,7 @@ cd ..
 flutterfire configure  # Re-run configuration
 
 # Check firebase_options.dart exists
-ls lib/firebase_options.dart
+ls lib/config/firebase_options.dart
 
 # Verify Firebase project ID in firebase_options.dart
 ```

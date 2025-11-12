@@ -40,7 +40,7 @@ Complete guide for deploying EchoAI to production environments.
 
 - [ ] Production Firebase project created
 - [ ] Authentication configured
-- [ ] Vertex AI enabled
+- [ ] Firebase AI enabled
 - [ ] Rate limits configured
 - [ ] Security rules reviewed
 - [ ] Monitoring enabled
@@ -127,7 +127,7 @@ android {
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.avishkagihan.echoai">
+    package="com.example.echoai">
 
     <application
         android:label="EchoAI"
@@ -143,11 +143,11 @@ android {
 ```gradle
 android {
     defaultConfig {
-        applicationId "com.avishkagihan.echoai"
+        applicationId "com.example.echoai"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 1
-        versionName "1.0.0"
+        versionName "0.1.0"
     }
 }
 ```
@@ -246,13 +246,13 @@ adb install build/app/outputs/flutter-apk/app-release.apk
     <string>EchoAI</string>
 
     <key>CFBundleIdentifier</key>
-    <string>com.yourcompany.echoai</string>
+    <string>com.example.echoai</string>
 
     <key>CFBundleVersion</key>
     <string>1</string>
 
     <key>CFBundleShortVersionString</key>
-    <string>1.0.0</string>
+    <string>0.1.0</string>
 
     <!-- Existing permissions... -->
 </dict>
@@ -268,8 +268,8 @@ open ios/Runner.xcworkspace
 
 1. Select Runner target
 2. General tab:
-   - Bundle Identifier: `com.yourcompany.echoai`
-   - Version: `1.0.0`
+   - Bundle Identifier: `com.example.echoai`
+   - Version: `0.1.0`
    - Build: `1`
 3. Signing & Capabilities:
    - Check "Automatically manage signing"
@@ -284,8 +284,8 @@ open ios/Runner.xcworkspace
    - Platform: iOS
    - Name: EchoAI
    - Primary Language: English
-   - Bundle ID: com.yourcompany.echoai
-   - SKU: echoai-1-0-0
+   - Bundle ID: com.example.echoai
+   - SKU: echoai-0-1-0
 
 ### 4. Build Archive
 
@@ -394,7 +394,7 @@ firebase use echoai-prod
 # - Google Sign-In
 ```
 
-**Vertex AI:**
+**Firebase AI:**
 
 ```bash
 # Enable in Firebase Console
@@ -422,7 +422,7 @@ service cloud.firestore {
 flutterfire configure --project=echoai-prod
 
 # Commit new firebase_options.dart
-git add lib/firebase_options.dart
+git add lib/config/firebase_options.dart
 git commit -m "chore: update firebase config for production"
 ```
 

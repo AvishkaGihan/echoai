@@ -122,7 +122,7 @@ This will:
 In [Firebase Console](https://console.firebase.google.com):
 
 - Enable **Authentication** (Email/Password + Google Sign-In)
-- Enable **Vertex AI** for Gemini API access
+- Enable **Firebase AI** for Gemini API access
 
 6. **Configure Platform-Specific Settings**
 
@@ -267,17 +267,17 @@ Edit `lib/utils/constants.dart` to modify:
 
 ## 📊 Tech Stack
 
-| Component            | Technology         | Version |
-| -------------------- | ------------------ | ------- |
-| **Framework**        | Flutter            | 3.24+   |
-| **Language**         | Dart               | 3.5+    |
-| **AI API**           | Firebase Vertex AI | 0.3.3+  |
-| **Authentication**   | Firebase Auth      | 5.3.3+  |
-| **Database**         | SQLite             | 2.4.2+  |
-| **Voice Input**      | speech_to_text     | 7.3.0+  |
-| **Voice Output**     | flutter_tts        | 4.2.3+  |
-| **State Management** | Provider           | 6.1.2+  |
-| **OAuth**            | google_sign_in     | 7.2.0+  |
+| Component            | Technology     | Version |
+| -------------------- | -------------- | ------- |
+| **Framework**        | Flutter        | 3.24+   |
+| **Language**         | Dart           | 3.5+    |
+| **AI API**           | Firebase AI    | 3.5.0+  |
+| **Authentication**   | Firebase Auth  | 6.1.2+  |
+| **Database**         | SQLite         | 2.4.2+  |
+| **Voice Input**      | speech_to_text | 7.3.0+  |
+| **Voice Output**     | flutter_tts    | 4.2.3+  |
+| **State Management** | Provider       | 6.1.5+  |
+| **OAuth**            | google_sign_in | 7.2.0+  |
 
 ## 🎨 Design System
 

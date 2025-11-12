@@ -20,19 +20,17 @@ echoai/
 │   │   │   ├── AndroidManifest.xml  # App permissions & config
 │   │   │   ├── kotlin/              # Kotlin code (if any)
 │   │   │   └── res/                 # Android resources
-│   │   ├── build.gradle             # App-level Gradle config
+│   │   ├── build.gradle.kts         # App-level Gradle config (Kotlin DSL)
 │   │   └── google-services.json     # Firebase config (generated)
 │   ├── gradle/                      # Gradle wrapper
-│   └── build.gradle                 # Project-level Gradle config
+│   ├── build.gradle.kts             # Project-level Gradle config (Kotlin DSL)
+│   └── settings.gradle.kts          # Gradle settings (Kotlin DSL)
 │
 ├── assets/                           # Static assets
-│   ├── images/                      # App images
-│   │   ├── logo.png                 # App logo
-│   │   ├── splash.png               # Splash screen
-│   │   └── icons/                   # Custom icons
-│   ├── fonts/                       # Custom fonts (if any)
-│   └── audio/                       # Sound effects (if any)
+│   ├── logo.png                     # App logo
+│   └── splash_screen.png            # Splash screen
 │
+├── build/                            # Build artifacts (generated)
 ├── docs/                             # Documentation
 │   ├── PRD.md                       # Product Requirements Document
 │   ├── architecture.md              # Architecture Document
@@ -42,12 +40,17 @@ echoai/
 │   └── PROJECT_STRUCTURE.md         # This file
 │
 ├── ios/                              # iOS native code
+│   ├── Flutter/                     # Flutter configuration
+│   │   ├── Debug.xcconfig           # Debug configuration
+│   │   ├── Release.xcconfig         # Release configuration
+│   │   └── Generated.xcconfig       # Generated configuration
 │   ├── Runner/
 │   │   ├── Info.plist               # iOS app configuration
 │   │   ├── AppDelegate.swift        # iOS app delegate
-│   │   └── GoogleService-Info.plist # Firebase config (generated)
-│   ├── Podfile                      # CocoaPods dependencies
-│   └── Runner.xcworkspace           # Xcode workspace
+│   │   └── GeneratedPluginRegistrant.h/.m # Plugin registry
+│   ├── Runner.xcodeproj/            # Xcode project
+│   ├── Runner.xcworkspace/          # Xcode workspace
+│   └── RunnerTests/                 # iOS tests
 │
 ├── lib/                              # Main application code
 │   ├── config/                      # Configuration files
@@ -85,6 +88,7 @@ echoai/
 │   ├── utils/                       # Utilities & helpers
 │   │   ├── constants.dart           # App constants
 │   │   ├── extensions.dart          # Dart extensions
+│   │   ├── logger.dart              # Logging utilities
 │   │   ├── result.dart              # Result type
 │   │   └── theme.dart               # App theme
 │   │
@@ -96,13 +100,17 @@ echoai/
 │   │
 │   └── main.dart                    # App entry point
 │
+├── linux/                            # Linux native code
+├── macos/                            # macOS native code
 ├── test/                             # Tests
 │   ├── models/
 │   │   ├── message_test.dart
 │   │   └── conversation_test.dart
 │   ├── providers/
 │   │   ├── chat_provider_test.dart
-│   │   └── settings_provider_test.dart
+│   │   ├── chat_provider_test.mocks.dart
+│   │   ├── settings_provider_test.dart
+│   │   └── settings_provider_test.mocks.dart
 │   ├── services/
 │   │   ├── auth_service_test.dart
 │   │   ├── database_service_test.dart
@@ -111,12 +119,19 @@ echoai/
 │       ├── message_bubble_test.dart
 │       └── message_input_test.dart
 │
+├── web/                              # Web build files
+├── windows/                          # Windows native code
+├── .dart_tool/                       # Dart tools (generated)
+├── .flutter-plugins-dependencies     # Flutter plugins (generated)
 ├── .gitignore                        # Git ignore rules
 ├── .metadata                         # Flutter metadata
 ├── analysis_options.yaml             # Dart analyzer config
 ├── CHANGELOG.md                      # Version history
 ├── CONTRIBUTING.md                   # Contribution guidelines
+├── echoai.iml                        # IntelliJ IDEA module file
+├── firebase.json                     # Firebase configuration
 ├── LICENSE                           # MIT License
+├── pubspec.lock                      # Dependency lock file (generated)
 ├── pubspec.yaml                      # Dependencies & metadata
 ├── README.md                         # Project overview
 └── SECURITY.md                       # Security policy
@@ -134,7 +149,7 @@ echoai/
 - **Key Sections:**
   - `name`: Project name
   - `description`: Project description
-  - `version`: App version (1.0.0+1)
+  - `version`: App version (0.1.0)
   - `environment`: SDK constraints
   - `dependencies`: Production dependencies
   - `dev_dependencies`: Development dependencies
@@ -306,8 +321,10 @@ SQLite → fromMap() → Message
 **Key Files:**
 
 - `Info.plist`: App metadata, permissions
-- `Podfile`: CocoaPods dependencies
-- `GoogleService-Info.plist`: Firebase configuration
+- `AppDelegate.swift`: iOS app delegate
+- `GeneratedPluginRegistrant.h/.m`: Plugin registry
+- `Runner.xcworkspace`: Xcode workspace (use this, not .xcodeproj)
+- `Runner.xcodeproj`: Xcode project configuration
 
 **Permission Descriptions:**
 
@@ -353,16 +370,16 @@ test/services/auth_service_test.dart
 ### Production Dependencies
 
 ```yaml
-firebase_core: ^3.7.0 # Firebase initialization
-firebase_auth: ^5.3.3 # Authentication
-firebase_vertexai: ^0.3.3 # Gemini AI
-provider: ^6.1.2 # State management
+firebase_core: ^4.2.1 # Firebase initialization
+firebase_auth: ^6.1.2 # Authentication
+firebase_ai: ^3.5.0 # Gemini AI
+provider: ^6.1.5+1 # State management
 sqflite: ^2.4.2 # Local database
 speech_to_text: ^7.3.0 # Voice input
 flutter_tts: ^4.2.3 # Voice output
 google_sign_in: ^7.2.0 # Google OAuth
 uuid: ^4.5.2 # Unique IDs
-intl: ^0.19.0 # Internationalization
+intl: ^0.20.2 # Internationalization
 path_provider: ^2.1.5 # File paths
 ```
 
@@ -548,5 +565,5 @@ Need help navigating the project?
 
 ---
 
-**Last Updated:** November 11, 2025
-**Version:** 1.0.0
+**Last Updated:** November 13, 2025
+**Version:** 0.1.0
