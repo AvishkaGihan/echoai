@@ -38,7 +38,7 @@ Use this checklist to ensure your portfolio project is production-ready and prof
 
 ### App Assets
 
-- [ ] App icon (1024x1024 PNG)
+- [x] App icon (1024x1024 PNG)
   - iOS: various sizes in Assets.xcassets
   - Android: various sizes in res/mipmap
 - [ ] Splash screen (2048x2048 PNG)
