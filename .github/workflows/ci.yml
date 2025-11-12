@@ -121,7 +121,7 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build APK
+      - name: Build
         run: flutter build apk --release
 
       - name: Build App Bundle
@@ -211,7 +211,7 @@ jobs:
           output: "trivy-results.sarif"
 
       - name: Upload Trivy results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "trivy-results.sarif"
 
