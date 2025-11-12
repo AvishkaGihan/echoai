@@ -155,9 +155,9 @@ If you were using the alpha version (0.x), please note:
 
 For issues, questions, or feedback:
 
-- GitHub Issues: https://github.com/OWNER/echoai/issues
-- Discussions: https://github.com/OWNER/echoai/discussions
-- Email: support@echoai.example.com
+- GitHub Issues: https://github.com/AvishkaGihan/echoai/issues
+- Discussions: https://github.com/AvishkaGihan/echoai/discussions
+- Email: support@echoai.com
 
 ---
 
