@@ -7,7 +7,7 @@
         </intent>
     </queries>
     <application
-        android:label="echoai"
+        android:label="EchoAI"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

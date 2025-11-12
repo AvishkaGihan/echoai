@@ -1,6 +1,6 @@
 {
-  "name": "echoai",
-  "short_name": "echoai",
+  "name": "EchoAI",
+  "short_name": "EchoAI",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",
