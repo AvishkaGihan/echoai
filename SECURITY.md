@@ -21,7 +21,7 @@ We take the security of EchoAI seriously. If you believe you have found a securi
 
 ### Please DO:
 
-1. **Email us directly at:** security@echoai.example.com
+1. **Email us directly at:** security@echoai.com
 
 2. **Include in your report:**
 
@@ -196,7 +196,7 @@ _No vulnerabilities reported yet_
 
 ## 📞 Contact
 
-**Security Team:** security@echoai.example.com
+**Security Team:** security@echoai.com
 **PGP Key:** [Link to public key]
 **Response Time:** 48 hours for acknowledgment
 
