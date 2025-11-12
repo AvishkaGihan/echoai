@@ -156,9 +156,10 @@ class _ChatScreenState extends State<ChatScreen> {
                           chatProvider.addReaction(message.id, emoji);
                         }
                       },
-                      onSpeak: !message.isUserMessage
-                          ? () => _handleSpeak(message.text)
-                          : null,
+                      onSpeak:
+                          !message.isUserMessage
+                              ? () => _handleSpeak(message.text)
+                              : null,
                     );
                   },
                 );

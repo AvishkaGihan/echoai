@@ -115,9 +115,10 @@ class Message {
       isUserMessage: (map['is_user_message'] as int) == 1,
       timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp'] as int),
       isStreaming: (map['is_streaming'] as int) == 1,
-      reactions: (map['reactions'] as String).isEmpty
-          ? []
-          : (map['reactions'] as String).split(','),
+      reactions:
+          (map['reactions'] as String).isEmpty
+              ? []
+              : (map['reactions'] as String).split(','),
       errorMessage: map['error_message'] as String?,
       tokensUsed: map['tokens_used'] as int? ?? 0,
     );

@@ -40,9 +40,10 @@ extension StringExtensions on String {
   String toTitleCase() {
     return split(' ')
         .map(
-          (word) => word.isEmpty
-              ? word
-              : '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}',
+          (word) =>
+              word.isEmpty
+                  ? word
+                  : '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}',
         )
         .join(' ');
   }
@@ -223,9 +224,8 @@ extension ContextExtensions on BuildContext {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError
-            ? AppConstants.errorColor
-            : AppConstants.neutralSurface,
+        backgroundColor:
+            isError ? AppConstants.errorColor : AppConstants.neutralSurface,
         behavior: SnackBarBehavior.floating,
       ),
     );

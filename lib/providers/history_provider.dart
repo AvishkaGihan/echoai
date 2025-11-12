@@ -120,11 +120,12 @@ class HistoryProvider extends ChangeNotifier {
     }
 
     final query = _searchQuery.toLowerCase();
-    _filteredConversations = _conversations.where((conversation) {
-      final title = conversation.title.toLowerCase();
-      final preview = conversation.preview.toLowerCase();
-      return title.contains(query) || preview.contains(query);
-    }).toList();
+    _filteredConversations =
+        _conversations.where((conversation) {
+          final title = conversation.title.toLowerCase();
+          final preview = conversation.preview.toLowerCase();
+          return title.contains(query) || preview.contains(query);
+        }).toList();
   }
 
   // ========================================

@@ -122,18 +122,19 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
             builder: (context, authProvider, child) {
               return ElevatedButton(
                 onPressed: authProvider.isLoading ? null : _handleResetPassword,
-                child: authProvider.isLoading
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            AppConstants.neutralBackground,
+                child:
+                    authProvider.isLoading
+                        ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              AppConstants.neutralBackground,
+                            ),
                           ),
-                        ),
-                      )
-                    : const Text('Send Reset Link'),
+                        )
+                        : const Text('Send Reset Link'),
               );
             },
           ),

@@ -192,18 +192,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   builder: (context, authProvider, child) {
                     return ElevatedButton(
                       onPressed: authProvider.isLoading ? null : _handleLogin,
-                      child: authProvider.isLoading
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  AppConstants.neutralBackground,
+                      child:
+                          authProvider.isLoading
+                              ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppConstants.neutralBackground,
+                                  ),
                                 ),
-                              ),
-                            )
-                          : const Text('Sign In'),
+                              )
+                              : const Text('Sign In'),
                     );
                   },
                 ),

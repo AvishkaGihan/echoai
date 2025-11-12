@@ -222,9 +222,8 @@ class DatabaseService {
         limit: limit ?? AppConstants.conversationPageSize,
       );
 
-      final conversations = maps
-          .map((map) => Conversation.fromMap(map))
-          .toList();
+      final conversations =
+          maps.map((map) => Conversation.fromMap(map)).toList();
       return Result.success(conversations);
     } catch (e) {
       return Result.error('Failed to load conversations: ${e.toString()}');
@@ -364,9 +363,8 @@ class DatabaseService {
         }
       }
 
-      final conversations = uniqueMaps
-          .map((map) => Conversation.fromMap(map))
-          .toList();
+      final conversations =
+          uniqueMaps.map((map) => Conversation.fromMap(map)).toList();
       return Result.success(conversations);
     } catch (e) {
       return Result.error('Failed to search conversations: ${e.toString()}');

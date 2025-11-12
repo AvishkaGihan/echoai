@@ -112,9 +112,10 @@ class Conversation {
 
   /// Update an existing message (useful for streaming updates)
   Conversation updateMessage(String messageId, Message updatedMessage) {
-    final updatedMessages = messages.map((m) {
-      return m.id == messageId ? updatedMessage : m;
-    }).toList();
+    final updatedMessages =
+        messages.map((m) {
+          return m.id == messageId ? updatedMessage : m;
+        }).toList();
 
     return copyWith(messages: updatedMessages, lastUpdatedAt: DateTime.now());
   }

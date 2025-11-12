@@ -71,9 +71,7 @@ void main() {
         );
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(body: MessageBubble(message: aiMessage)),
-          ),
+          MaterialApp(home: Scaffold(body: MessageBubble(message: aiMessage))),
         );
 
         expect(find.text('I am doing great!'), findsOneWidget);
@@ -88,9 +86,7 @@ void main() {
         );
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(body: MessageBubble(message: aiMessage)),
-          ),
+          MaterialApp(home: Scaffold(body: MessageBubble(message: aiMessage))),
         );
 
         expect(find.byType(Text), findsWidgets);
@@ -103,9 +99,7 @@ void main() {
         );
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(body: MessageBubble(message: aiMessage)),
-          ),
+          MaterialApp(home: Scaffold(body: MessageBubble(message: aiMessage))),
         );
 
         expect(find.byType(Container), findsWidgets);
@@ -220,9 +214,7 @@ void main() {
         );
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(body: MessageBubble(message: aiMessage)),
-          ),
+          MaterialApp(home: Scaffold(body: MessageBubble(message: aiMessage))),
         );
 
         expect(find.byIcon(Icons.add_reaction_outlined), findsOneWidget);
@@ -438,9 +430,7 @@ void main() {
         );
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(body: MessageBubble(message: aiMessage)),
-          ),
+          MaterialApp(home: Scaffold(body: MessageBubble(message: aiMessage))),
         );
 
         // Buttons should be tappable

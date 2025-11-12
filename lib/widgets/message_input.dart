@@ -106,9 +106,10 @@ class _MessageInputState extends State<MessageInput> {
             textInputAction: TextInputAction.send,
             onSubmitted: (_) => _handleSend(),
             decoration: InputDecoration(
-              hintText: widget.isStreaming
-                  ? 'AI is responding...'
-                  : AppConstants.emptyMessagesHint,
+              hintText:
+                  widget.isStreaming
+                      ? 'AI is responding...'
+                      : AppConstants.emptyMessagesHint,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(AppConstants.radiusLarge),
                 borderSide: BorderSide(
@@ -145,12 +146,14 @@ class _MessageInputState extends State<MessageInput> {
             onPressed: (_hasText && !widget.isStreaming) ? _handleSend : null,
             icon: const Icon(Icons.send),
             style: IconButton.styleFrom(
-              backgroundColor: (_hasText && !widget.isStreaming)
-                  ? AppConstants.primaryPurple
-                  : AppConstants.neutralSurface,
-              foregroundColor: (_hasText && !widget.isStreaming)
-                  ? AppConstants.neutralBackground
-                  : AppConstants.textSecondary,
+              backgroundColor:
+                  (_hasText && !widget.isStreaming)
+                      ? AppConstants.primaryPurple
+                      : AppConstants.neutralSurface,
+              foregroundColor:
+                  (_hasText && !widget.isStreaming)
+                      ? AppConstants.neutralBackground
+                      : AppConstants.textSecondary,
             ),
           ),
         ),

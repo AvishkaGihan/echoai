@@ -93,23 +93,24 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Future<bool> _showDeleteConfirmation() async {
     return await showDialog<bool>(
           context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Delete Conversation?'),
-            content: const Text(AppConstants.confirmDeleteConversation),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Cancel'),
+          builder:
+              (context) => AlertDialog(
+                title: const Text('Delete Conversation?'),
+                content: const Text(AppConstants.confirmDeleteConversation),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: const Text('Cancel'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context, true),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppConstants.errorColor,
+                    ),
+                    child: const Text('Delete'),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppConstants.errorColor,
-                ),
-                child: const Text('Delete'),
-              ),
-            ],
-          ),
         ) ??
         false;
   }
@@ -117,23 +118,24 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Future<bool> _showDeleteAllConfirmation() async {
     return await showDialog<bool>(
           context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Delete All Conversations?'),
-            content: const Text(AppConstants.confirmDeleteAllConversations),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Cancel'),
+          builder:
+              (context) => AlertDialog(
+                title: const Text('Delete All Conversations?'),
+                content: const Text(AppConstants.confirmDeleteAllConversations),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: const Text('Cancel'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context, true),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppConstants.errorColor,
+                    ),
+                    child: const Text('Delete All'),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppConstants.errorColor,
-                ),
-                child: const Text('Delete All'),
-              ),
-            ],
-          ),
         ) ??
         false;
   }
@@ -157,21 +159,22 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     _handleDeleteAll();
                   }
                 },
-                itemBuilder: (context) => [
-                  const PopupMenuItem(
-                    value: 'delete_all',
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.delete_outline,
-                          color: AppConstants.errorColor,
+                itemBuilder:
+                    (context) => [
+                      const PopupMenuItem(
+                        value: 'delete_all',
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.delete_outline,
+                              color: AppConstants.errorColor,
+                            ),
+                            SizedBox(width: AppConstants.spaceSm),
+                            Text('Delete All'),
+                          ],
                         ),
-                        SizedBox(width: AppConstants.spaceSm),
-                        Text('Delete All'),
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
+                    ],
               );
             },
           ),
@@ -187,15 +190,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
               decoration: InputDecoration(
                 hintText: 'Search conversations...',
                 prefixIcon: const Icon(Icons.search),
-                suffixIcon: _searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          _searchController.clear();
-                          _handleSearch('');
-                        },
-                      )
-                    : null,
+                suffixIcon:
+                    _searchController.text.isNotEmpty
+                        ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _searchController.clear();
+                            _handleSearch('');
+                          },
+                        )
+                        : null,
               ),
               onChanged: _handleSearch,
             ),
@@ -228,8 +232,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       return ConversationCard(
                         conversation: conversation,
                         onTap: () => _handleConversationTap(conversation.id),
-                        onDelete: () =>
-                            _handleDeleteConversation(conversation.id),
+                        onDelete:
+                            () => _handleDeleteConversation(conversation.id),
                       );
                     },
                   ),

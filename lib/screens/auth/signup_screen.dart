@@ -193,18 +193,19 @@ class _SignupScreenState extends State<SignupScreen> {
                   builder: (context, authProvider, child) {
                     return ElevatedButton(
                       onPressed: authProvider.isLoading ? null : _handleSignup,
-                      child: authProvider.isLoading
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  AppConstants.neutralBackground,
+                      child:
+                          authProvider.isLoading
+                              ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppConstants.neutralBackground,
+                                  ),
                                 ),
-                              ),
-                            )
-                          : const Text('Create Account'),
+                              )
+                              : const Text('Create Account'),
                     );
                   },
                 ),

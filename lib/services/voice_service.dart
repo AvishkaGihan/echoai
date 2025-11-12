@@ -260,9 +260,8 @@ class VoiceService {
     _silenceTimer = Timer.periodic(const Duration(milliseconds: 500), (timer) {
       if (_lastSoundTime == null) return;
 
-      final silenceDuration = DateTime.now()
-          .difference(_lastSoundTime!)
-          .inMilliseconds;
+      final silenceDuration =
+          DateTime.now().difference(_lastSoundTime!).inMilliseconds;
 
       if (silenceDuration >= ApiConfig.silenceThresholdMs) {
         // Auto-stop on silence

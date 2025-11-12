@@ -89,8 +89,8 @@ class _AppContent extends StatelessWidget {
           // Handle unknown routes
           onUnknownRoute: (settings) {
             return MaterialPageRoute(
-              builder: (context) =>
-                  const ErrorScreen(message: 'Page not found'),
+              builder:
+                  (context) => const ErrorScreen(message: 'Page not found'),
             );
           },
         );

@@ -13,23 +13,24 @@ class SettingsScreen extends StatelessWidget {
   Future<void> _handleLogout(BuildContext context) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Logout'),
-        content: const Text(AppConstants.confirmLogout),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Logout'),
+            content: const Text(AppConstants.confirmLogout),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context, true),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppConstants.errorColor,
+                ),
+                child: const Text('Logout'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppConstants.errorColor,
-            ),
-            child: const Text('Logout'),
-          ),
-        ],
-      ),
     );
 
     if (confirmed == true && context.mounted) {
@@ -58,34 +59,35 @@ class SettingsScreen extends StatelessWidget {
           Consumer<SettingsProvider>(
             builder: (context, settingsProvider, child) {
               return Column(
-                children: AppConstants.assistantModes.map((mode) {
-                  // ignore: deprecated_member_use
-                  return RadioListTile<String>(
-                    value: mode,
-                    // ignore: deprecated_member_use
-                    groupValue: settingsProvider.assistantMode,
-                    // ignore: deprecated_member_use
-                    onChanged: (value) {
-                      if (value != null) {
-                        settingsProvider.setAssistantMode(value);
-                      }
-                    },
-                    title: Row(
-                      children: [
-                        Text(AppConstants.modeEmojis[mode] ?? ''),
-                        const SizedBox(width: AppConstants.spaceSm),
-                        Text(mode.capitalize()),
-                      ],
-                    ),
-                    subtitle: Text(
-                      AppConstants.modeDescriptions[mode] ?? '',
-                      style: const TextStyle(
-                        fontSize: AppConstants.fontSizeSmall,
-                        color: AppConstants.textSecondary,
-                      ),
-                    ),
-                  );
-                }).toList(),
+                children:
+                    AppConstants.assistantModes.map((mode) {
+                      // ignore: deprecated_member_use
+                      return RadioListTile<String>(
+                        value: mode,
+                        // ignore: deprecated_member_use
+                        groupValue: settingsProvider.assistantMode,
+                        // ignore: deprecated_member_use
+                        onChanged: (value) {
+                          if (value != null) {
+                            settingsProvider.setAssistantMode(value);
+                          }
+                        },
+                        title: Row(
+                          children: [
+                            Text(AppConstants.modeEmojis[mode] ?? ''),
+                            const SizedBox(width: AppConstants.spaceSm),
+                            Text(mode.capitalize()),
+                          ],
+                        ),
+                        subtitle: Text(
+                          AppConstants.modeDescriptions[mode] ?? '',
+                          style: const TextStyle(
+                            fontSize: AppConstants.fontSizeSmall,
+                            color: AppConstants.textSecondary,
+                          ),
+                        ),
+                      );
+                    }).toList(),
               );
             },
           ),
@@ -169,17 +171,17 @@ class SettingsScreen extends StatelessWidget {
                           icon: const Icon(Icons.remove),
                           onPressed:
                               settingsProvider.voiceSpeed >
-                                  AppConstants.minVoiceSpeed
-                              ? () => settingsProvider.decreaseVoiceSpeed()
-                              : null,
+                                      AppConstants.minVoiceSpeed
+                                  ? () => settingsProvider.decreaseVoiceSpeed()
+                                  : null,
                         ),
                         IconButton(
                           icon: const Icon(Icons.add),
                           onPressed:
                               settingsProvider.voiceSpeed <
-                                  AppConstants.maxVoiceSpeed
-                              ? () => settingsProvider.increaseVoiceSpeed()
-                              : null,
+                                      AppConstants.maxVoiceSpeed
+                                  ? () => settingsProvider.increaseVoiceSpeed()
+                                  : null,
                         ),
                       ],
                     ),
@@ -296,81 +298,85 @@ class SettingsScreen extends StatelessWidget {
           top: Radius.circular(AppConstants.radiusLarge),
         ),
       ),
-      builder: (context) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppConstants.spaceLg),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Choose Accent Color',
-                style: TextStyle(
-                  fontSize: AppConstants.fontSizeH3,
-                  fontWeight: AppConstants.fontWeightBold,
-                ),
-              ),
-
-              const SizedBox(height: AppConstants.spaceLg),
-
-              Wrap(
-                spacing: AppConstants.spaceMd,
-                runSpacing: AppConstants.spaceMd,
-                children: AppConstants.accentColors.entries.map((entry) {
-                  final isSelected = settingsProvider.accentColor == entry.key;
-
-                  return InkWell(
-                    onTap: () {
-                      settingsProvider.setAccentColor(entry.key);
-                      Navigator.pop(context);
-                    },
-                    borderRadius: BorderRadius.circular(
-                      AppConstants.radiusMedium,
+      builder:
+          (context) => SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(AppConstants.spaceLg),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Choose Accent Color',
+                    style: TextStyle(
+                      fontSize: AppConstants.fontSizeH3,
+                      fontWeight: AppConstants.fontWeightBold,
                     ),
-                    child: Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: entry.value,
-                        borderRadius: BorderRadius.circular(
-                          AppConstants.radiusMedium,
-                        ),
-                        border: isSelected
-                            ? Border.all(
-                                color: AppConstants.textPrimary,
-                                width: 3,
-                              )
-                            : null,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (isSelected)
-                            const Icon(
-                              Icons.check,
-                              color: AppConstants.neutralBackground,
-                              size: 32,
-                            ),
-                          const SizedBox(height: AppConstants.spaceXs),
-                          Text(
-                            entry.key.capitalize(),
-                            style: const TextStyle(
-                              color: AppConstants.neutralBackground,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
+                  ),
 
-              const SizedBox(height: AppConstants.spaceSm),
-            ],
+                  const SizedBox(height: AppConstants.spaceLg),
+
+                  Wrap(
+                    spacing: AppConstants.spaceMd,
+                    runSpacing: AppConstants.spaceMd,
+                    children:
+                        AppConstants.accentColors.entries.map((entry) {
+                          final isSelected =
+                              settingsProvider.accentColor == entry.key;
+
+                          return InkWell(
+                            onTap: () {
+                              settingsProvider.setAccentColor(entry.key);
+                              Navigator.pop(context);
+                            },
+                            borderRadius: BorderRadius.circular(
+                              AppConstants.radiusMedium,
+                            ),
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: entry.value,
+                                borderRadius: BorderRadius.circular(
+                                  AppConstants.radiusMedium,
+                                ),
+                                border:
+                                    isSelected
+                                        ? Border.all(
+                                          color: AppConstants.textPrimary,
+                                          width: 3,
+                                        )
+                                        : null,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  if (isSelected)
+                                    const Icon(
+                                      Icons.check,
+                                      color: AppConstants.neutralBackground,
+                                      size: 32,
+                                    ),
+                                  const SizedBox(height: AppConstants.spaceXs),
+                                  Text(
+                                    entry.key.capitalize(),
+                                    style: const TextStyle(
+                                      color: AppConstants.neutralBackground,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                  ),
+
+                  const SizedBox(height: AppConstants.spaceSm),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
     );
   }
 }

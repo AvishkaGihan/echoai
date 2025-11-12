@@ -173,9 +173,10 @@ class GeminiService {
   List<Content> _buildConversationHistory(List<Message> messages) {
     // Only include recent messages to stay within token limits
     // Take last 10 message pairs (20 messages total)
-    final recentMessages = messages.length > 20
-        ? messages.sublist(messages.length - 20)
-        : messages;
+    final recentMessages =
+        messages.length > 20
+            ? messages.sublist(messages.length - 20)
+            : messages;
 
     final history = <Content>[];
 

@@ -30,23 +30,24 @@ class ConversationCard extends StatelessWidget {
       confirmDismiss: (direction) async {
         return await showDialog<bool>(
           context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Delete Conversation?'),
-            content: const Text(AppConstants.confirmDeleteConversation),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Cancel'),
+          builder:
+              (context) => AlertDialog(
+                title: const Text('Delete Conversation?'),
+                content: const Text(AppConstants.confirmDeleteConversation),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: const Text('Cancel'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context, true),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppConstants.errorColor,
+                    ),
+                    child: const Text('Delete'),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppConstants.errorColor,
-                ),
-                child: const Text('Delete'),
-              ),
-            ],
-          ),
         );
       },
       onDismissed: (direction) {
