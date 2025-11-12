@@ -128,13 +128,13 @@ jobs:
         run: flutter build appbundle --release
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: android-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload App Bundle artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: android-bundle
           path: build/app/outputs/bundle/release/app-release.aab
@@ -185,7 +185,7 @@ jobs:
           zip -r app-release.ipa Payload
 
       - name: Upload IPA artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ios-ipa
           path: app-release.ipa
@@ -233,19 +233,19 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download Android APK
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: android-apk
           path: ./artifacts
 
       - name: Download Android Bundle
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: android-bundle
           path: ./artifacts
 
       - name: Download iOS IPA
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ios-ipa
           path: ./artifacts
