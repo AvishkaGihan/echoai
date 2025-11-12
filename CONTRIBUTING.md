@@ -56,7 +56,7 @@ Before you begin, ensure you have:
 3. **Add Upstream Remote**
 
    ```bash
-   git remote add upstream https://github.com/ORIGINAL_OWNER/echoai.git
+   git remote add upstream https://github.com/AvishkaGihan/echoai.git
    ```
 
 4. **Install Dependencies**
@@ -450,8 +450,8 @@ We especially welcome contributions in:
 If you need help:
 
 1. Check the [documentation](docs/)
-2. Search existing [issues](https://github.com/OWNER/echoai/issues)
-3. Ask in [discussions](https://github.com/OWNER/echoai/discussions)
+2. Search existing [issues](https://github.com/AvishkaGihan/echoai/issues)
+3. Ask in [discussions](https://github.com/AvishkaGihan/echoai/discussions)
 4. Reach out to maintainers
 
 ## 🏆 Recognition

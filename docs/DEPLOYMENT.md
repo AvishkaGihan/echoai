@@ -83,8 +83,8 @@ echo "*.jks" >> .gitignore
 **Create `android/key.properties`:**
 
 ```properties
-storePassword=YOUR_KEYSTORE_PASSWORD
-keyPassword=YOUR_KEY_PASSWORD
+storePassword=example_keystore_password
+keyPassword=example_key_password
 keyAlias=echoai-key-alias
 storeFile=/Users/yourname/secure-keys/echoai-release-key.jks
 ```
@@ -127,7 +127,7 @@ android {
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yourcompany.echoai">
+    package="com.avishkagihan.echoai">
 
     <application
         android:label="EchoAI"
@@ -143,7 +143,7 @@ android {
 ```gradle
 android {
     defaultConfig {
-        applicationId "com.yourcompany.echoai"
+        applicationId "com.avishkagihan.echoai"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 1

@@ -111,7 +111,7 @@ sudo gem install cocoapods
 
 ## Project Setup
 
-### 1. Clone Repository
+# Clone repository
 
 ```bash
 # Create workspace directory
@@ -119,7 +119,7 @@ mkdir ~/development
 cd ~/development
 
 # Clone repository
-git clone https://github.com/YOUR_USERNAME/echoai.git
+git clone https://github.com/AvishkaGihan/echoai.git
 cd echoai
 ```
 
@@ -231,7 +231,7 @@ Edit `android/app/src/main/AndroidManifest.xml`:
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.echoai">
+    package="com.avishkagihan.echoai">
 
     <!-- Add these permissions -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -261,7 +261,7 @@ android {
     compileSdkVersion 34  // Use latest
 
     defaultConfig {
-        applicationId "com.example.echoai"
+        applicationId "com.avishkagihan.echoai"
         minSdkVersion 21  // For Firebase AI
         targetSdkVersion 34
         versionCode 1
@@ -299,6 +299,10 @@ Edit `ios/Runner/Info.plist`:
     <!-- Speech recognition permission -->
     <key>NSSpeechRecognitionUsageDescription</key>
     <string>EchoAI uses speech recognition to convert your voice to text.</string>
+
+    <!-- Bundle identifier -->
+    <key>CFBundleIdentifier</key>
+    <string>com.avishkagihan.echoai</string>
 </dict>
 ```
 
@@ -550,14 +554,14 @@ git push origin feature/my-feature
 
 ---
 
-## Support
+### Support
 
 Need help?
 
 - 📖 Check [Documentation](../README.md)
-- 🐛 Report issues on [GitHub](https://github.com/OWNER/echoai/issues)
-- 💬 Ask in [Discussions](https://github.com/OWNER/echoai/discussions)
-- 📧 Email: support@echoai.example.com
+- 🐛 Report issues on [GitHub](https://github.com/AvishkaGihan/echoai/issues)
+- 💬 Ask in [Discussions](https://github.com/AvishkaGihan/echoai/discussions)
+- 📧 Email: support@echoai.com
 
 ---
 
