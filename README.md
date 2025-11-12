@@ -64,6 +64,7 @@ lib/
 │   ├── constants.dart
 │   ├── theme.dart
 │   ├── extensions.dart
+│   ├── logger.dart
 │   └── result.dart
 └── config/           # Configuration files
     ├── firebase_options.dart
@@ -86,7 +87,7 @@ lib/
 1. **Clone the repository**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/AvishkaGihan/echoai.git
 cd echoai
 ```
 
@@ -337,7 +338,6 @@ flutterfire configure
 ```bash
 flutter clean
 flutter pub get
-cd ios && pod install && cd ..
 flutter run
 ```
 
@@ -369,11 +369,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Your Name**
+**Avishka Gihan**
 
-- Portfolio: [your-portfolio.com](https://your-portfolio.com)
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+- GitHub: [@AvishkaGihan](https://github.com/AvishkaGihan)
 
 ## 🙏 Acknowledgments
 
@@ -410,7 +408,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 For issues and questions:
 
 - Open an issue on GitHub
-- Email: your.email@example.com
+- Check the [documentation](docs/)
 
 ---
 
