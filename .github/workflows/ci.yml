@@ -172,6 +172,11 @@ jobs:
       - name: Install CocoaPods dependencies
         run: |
           cd ios
+          rm -rf Pods Podfile.lock .symlinks
+          cd ..
+          flutter clean
+          flutter pub get
+          cd ios
           pod install
           cd ..
 
