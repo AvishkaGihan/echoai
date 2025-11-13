@@ -169,6 +169,16 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Clean CocoaPods cache
+        run: |
+          pod cache clean --all
+          rm -rf ios/Pods
+          rm -rf ios/Podfile.lock
+          rm -rf ios/.symlinks
+
+      - name: Flutter clean
+        run: flutter clean
+
       - name: Install CocoaPods dependencies
         run: |
           cd ios
